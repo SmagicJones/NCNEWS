@@ -1,24 +1,47 @@
-
-import Header from './Header'
+import { useParams } from 'react-router-dom'
 import Votes from './Votes'
 
 
-const SingleArticle = ({article_id, title, topic, author, body, created_at, votes, article_img_url})=>{
+import { useEffect, useState } from 'react'
+import { fetchArticle } from '../utils/api'
+
+
+
+const SingleArticle = ()=>{
+    const {article_id} = useParams();
+
+    const [foundArticle, setFoundArticle] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        fetchArticle(article_id).then((data) => {
+            const article = data.article[0]
+            console.log(article, "article")
+            setFoundArticle(article)
+            setIsLoading(false)
+        })
+    }, [])
+
+
+    if(isLoading){
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+
     return(
         <>
-        <Header/>
-      
         <ul className="card">
          <li>
     <section>
-    <p className="title">{title}</p>
-    <img id="articleFullImg" src={article_img_url} alt={title}/>
-    <p>Topic: {topic}</p>
-    <p>Author: {author}</p>
-    <p>{body}</p>
-    <p>Created: {new Date(created_at).getFullYear()}</p>
-    <Votes votes={votes}/>
-    <p>Article ID: {article_id}</p>
+    <p className="">{foundArticle.title}</p>
+    <img id="" src={foundArticle.article_img_url} alt={foundArticle.title}/>
+    <p>Topic: {foundArticle.topic}</p>
+    <p>Author: {foundArticle.author}</p>
+    <p>{foundArticle.body}</p>
+    <p>Created: {new Date(foundArticle.created_at).getFullYear()}</p>
+    <Votes votes={foundArticle.votes}/>
+    <p>Article ID: {foundArticle.article_id}</p>
     </section>
     </li>
     </ul>
