@@ -45,13 +45,20 @@ const ArticlesList = () =>{
 
     return(
         <>
-        <ul className="mx-auto my-12 flex list-none items-center gap-8 flex-col-reverse max-w-100">
+        <main className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
+    
+        <ul className="flex flex-wrap mt-4 gap-4 bg-white p-4 rounded-xl justify-center">
         {articlesList.articles.map((article)=>{
+            
             return(
-                <ArticleCard title={article.title} topic={article.topic} votes={article.votes} article_img_url={article.article_img_url}  />
+                <main key={article.article_id}>
+                <ArticleCard title={article.title} topic={article.topic} votes={article.votes} article_img_url={article.article_img_url} article_id={article.article_id} />
+                </main>
             )
         })}
         </ul>
+        </main>
+    
         </>
     )
 

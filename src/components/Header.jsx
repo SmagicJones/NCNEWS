@@ -1,10 +1,10 @@
 import { useState } from "react";
 import boblogo from "../assets/bob-logo.svg";
-
+// import { Link } from "react-router-dom";
 
 import { MobileNav } from "./MobileNav";
 
-export const Header = () => {
+const Header = () => {
   const [btnState, setBtnState] = useState(false);
   const [menuState, setMenuState] = useState(false);
 
@@ -38,7 +38,7 @@ export const Header = () => {
               something
             </a>
             <a href="#contact" className="hover:opacity-90">
-              something
+              login
             </a>
           </nav>
         </div>
@@ -47,3 +47,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;
