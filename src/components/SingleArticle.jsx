@@ -31,19 +31,19 @@ const SingleArticle = ()=>{
 
     return(
         <>
-        <ul className="card">
-         <li>
-    <section>
-    <p className="">{foundArticle.title}</p>
-    <img id="" src={foundArticle.article_img_url} alt={foundArticle.title}/>
-    <p>Topic: {foundArticle.topic}</p>
-    <p>Author: {foundArticle.author}</p>
-    <p>{foundArticle.body}</p>
-    <p>Created: {new Date(foundArticle.created_at).getFullYear()}</p>
-    <Votes votes={foundArticle.votes}/>
-    <p>Article ID: {foundArticle.article_id}</p>
-    </section>
-    </li>
+        <ul className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
+            <li className='max-w-100 bg-cyan-500 hover:bg-cyan-400 rounded-xl pb-4 items-center justify-center'>
+                <section>
+                    <h3 className="text-center text-5xl p-4">{foundArticle.title}</h3>
+                    <img className='p-2 mx-auto' src={foundArticle.article_img_url} alt={foundArticle.title}/>
+                    <p className='text-2xl text-center p-2'>Topic: {foundArticle.topic}</p>
+                    <p className='text-1xl p-2'>Author: {foundArticle.author}</p>
+                    <p className='p-2'>{foundArticle.body}</p>
+                    <p className='text-center p-2'>Created: {new Date(foundArticle.created_at).getFullYear()}</p>
+                    <Votes votes={foundArticle.votes}/>
+                    <p className='text-center'>Article ID: {foundArticle.article_id}</p>
+             </section>
+         </li>
     </ul>
     </>
     )
