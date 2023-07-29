@@ -1,12 +1,12 @@
-import {useState, useEffect} from "react"
+import { useState, useEffect } from 'react';
 
 // import {useContext} from 'react'
 // import {UserContext} from '../contexts/UserContext'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
-import {fetchArticles} from '../utils/api'
+import { fetchArticles } from '../utils/api';
 
-import ArticleCard from './ArticleCard'
+import ArticleCard from './ArticleCard';
 
 // import Header from './Header'
 
@@ -14,54 +14,57 @@ import ArticleCard from './ArticleCard'
 
 // import Login from './Login'
 
+const ArticlesList = () => {
+  const { topic } = useParams();
+  // const {user, setUser} = useContext(UserContext)
+  const [articlesList, setArticlesList] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
 
+  console.log(topic, "topic before useEffect")
 
-const ArticlesList = () =>{
-    const {topic} = useParams();
-    // const {user, setUser} = useContext(UserContext)
-    const [articlesList, setArticlesList] = useState([])
-
-    const [isLoading, setIsLoading] = useState(true)
-
-    useEffect(()=>{
-        fetchArticles(topic).then((data)=>{
-            const articles = data.articles
-            setArticlesList(articles)
-            setIsLoading(false)
-        })
-    }, [topic])
-
+  useEffect(() => {
+    console.log(topic, "topic")
+    fetchArticles(topic).then((data) => {
     
+      const articles = data.articles;
+      console.log(articles)
+      setArticlesList(articles);
+      setIsLoading(false);
+    });
+  }, [topic]);
 
-    if(isLoading){
-        return( <section>
+  if (isLoading) {
+    return (
+      <section>
         <p>...Finding all the NCnews Articles </p>
         {/* <img id="logo" src='/src/images/bob-teaches-logo.svg'/> */}
-        </section>
-        )
-    }
-    console.log(articlesList.articles[0].author)
+      </section>
+    );
+  }
 
-    return(
-        <>
-        <main className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
-    
+
+  return (
+    <>
+      <main className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
         <ul className="flex flex-wrap mt-4 gap-4 bg-white p-4 rounded-xl justify-center">
-        {articlesList.articles.map((article)=>{
-            
-            return(
-                <main key={article.article_id}>
-                <ArticleCard title={article.title} topic={article.topic} votes={article.votes} article_img_url={article.article_img_url} article_id={article.article_id} />
-                </main>
-            )
-        })}
+          {articlesList.articles.map((article) => {
+            return (
+              <main key={article.article_id}>
+                <ArticleCard
+                  title={article.title}
+                  topic={article.topic}
+                  votes={article.votes}
+                  article_img_url={article.article_img_url}
+                  article_id={article.article_id}
+                />
+              </main>
+            );
+          })}
         </ul>
-        </main>
-    
-        </>
-    )
-
-}
+      </main>
+    </>
+  );
+};
 
 export default ArticlesList;
