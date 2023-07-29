@@ -1,38 +1,82 @@
 import { useState, useEffect } from 'react';
 
-// import {useContext} from 'react'
-// import {UserContext} from '../contexts/UserContext'
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 
 import { fetchArticles } from '../utils/api';
 
 import ArticleCard from './ArticleCard';
 
-// import Header from './Header'
-
-// import Footer from './Footer'
-
-// import Login from './Login'
-
 const ArticlesList = () => {
   const { topic } = useParams();
-  // const {user, setUser} = useContext(UserContext)
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const [articlesList, setArticlesList] = useState([]);
+  const [articleCount, setArticleCount] = useState(0);
+  let newParams = {};
 
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(topic, "topic before useEffect")
+  function handleSort(e) {
+    newParams = {
+      sort_by: searchParams.get('sort_by'),
+      order: searchParams.get('order'),
+      limit: searchParams.get('limit'),
+    };
+
+    if (!newParams.order) delete newParams.order;
+    if (!newParams.limit) delete newParams.limit;
+
+    newParams.sort_by = e.target.value;
+    setSearchParams(newParams);
+  }
+
+  function handleOrder(e) {
+    newParams = {
+      sort_by: searchParams.get('sort_by'),
+      order: searchParams.get('order'),
+      limit: searchParams.get('limit'),
+    };
+
+    if (!newParams.sort_by) delete newParams.sort_by;
+    if (!newParams.limit) delete newParams.limit;
+
+    newParams.order = e.target.value;
+    setSearchParams(newParams);
+  }
+
+  function handleLimit(e) {
+    newParams = {
+      sort_by: searchParams.get('sort_by'),
+      order: searchParams.get('order'),
+      limit: searchParams.get('limit'),
+    };
+
+    if (!newParams.order) delete newParams.order;
+    if (!newParams.sort_by) delete newParams.sort_by;
+
+    newParams.limit = e.target.value;
+    setSearchParams(newParams);
+  }
+
+  
+
+  const sort_by = searchParams.get('sort_by');
+  const order = searchParams.get('order');
+  const limit = searchParams.get('limit') || 9;
+  const p = searchParams.get('p');
+
+  
 
   useEffect(() => {
-    console.log(topic, "topic")
-    fetchArticles(topic).then((data) => {
-    
+    fetchArticles(topic, sort_by, order, limit, p).then((data) => {
       const articles = data.articles;
-      console.log(articles)
+      const total_count = data.articles.total_count[0].count
+      console.log(total_count);
+      setArticleCount(total_count)
       setArticlesList(articles);
       setIsLoading(false);
     });
-  }, [topic]);
+  }, [topic, sort_by, order, limit, p]);
 
   if (isLoading) {
     return (
@@ -43,9 +87,39 @@ const ArticlesList = () => {
     );
   }
 
-
   return (
     <>
+    <div className="top-0 z-10 bg-lime-500 text-white">
+      <section className="mx-auto flex flex-wrap max-w-4xl items-center justify-between p-4">
+
+      
+      <label htmlFor="sort-by">Sort Articles by: </label>
+      <select name="sort-by" id="sort-by" className="" onChange={handleSort}>
+        <option value="created_at">Date</option>
+        <option value="comment_count">Comments</option>
+        <option value="votes">Votes</option>
+      </select>
+      <label htmlFor="order">Order</label>
+      <select name="order" id="order" onChange={handleOrder}>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+      <label htmlFor="limit">Limit</label>
+      <select name="limit" id="limit" onChange={handleLimit}>
+        <option value="3">3</option>
+        <option value="6">6</option>
+        <option value="9">9</option>
+        <option value="12">12</option>
+        <option value="15">15</option>
+        <option value="18">18</option>
+        <option value="21">21</option>
+      </select>
+      </section>
+      </div>
+    
+
+
+
       <main className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
         <ul className="flex flex-wrap mt-4 gap-4 bg-white p-4 rounded-xl justify-center">
           {articlesList.articles.map((article) => {
@@ -63,6 +137,7 @@ const ArticlesList = () => {
           })}
         </ul>
       </main>
+
     </>
   );
 };

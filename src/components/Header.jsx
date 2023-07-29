@@ -5,6 +5,9 @@ import boblogo from '../assets/bob-logo.svg';
 import { MobileNav } from './MobileNav';
 
 import Topics from './Topics';
+import SortArticles from './SortArticles';
+
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 
 const Header = () => {
   const [btnState, setBtnState] = useState(false);
@@ -17,6 +20,8 @@ const Header = () => {
 
   let toggleMenu = menuState ? 'flex' : 'hidden';
   let buttonMenu = btnState ? 'toggle-btn' : '';
+
+
   return (
     <header className="sticky top-0 z-10 bg-lime-500 text-white">
       <section className="mx-auto flex flex-wrap max-w-4xl items-center justify-between p-4">
@@ -34,14 +39,29 @@ const Header = () => {
           </button>
           <nav className="hidden space-x-8 text-xl md:block" aria-label="main">
             <div className="hover:opacity-90">
-              <Topics/>
-           </div>
-            {/* <a href="#skills" className="hover:opacity-90">
-              something
-            </a>
-            <a href="#contact" className="hover:opacity-90">
-              login
-            </a> */}
+              <Topics />
+            </div>
+            {/* <label htmlFor="sort-by">Sort Articles by: </label>
+            <select name="sort-by" id="sort-by" className="" onChange={handleSort}>
+              <option value="created_at">Date</option>
+              <option value="comment_count">Comments</option>
+              <option value="votes">Votes</option>
+            </select> */}
+            {/* <label htmlFor="order">Order</label>
+            <select name="order" id="order" onChange={handleOrder}>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+            <label htmlFor="limit">Limit</label>
+            <select name="limit" id="limit" onChange={handleLimit}>
+              <option value="3">3</option>
+              <option value="6">6</option>
+              <option value="9">9</option>
+              <option value="12">12</option>
+              <option value="15">15</option>
+              <option value="18">18</option>
+              <option value="21">21</option>
+            </select> */}
           </nav>
         </div>
       </section>
