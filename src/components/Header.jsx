@@ -26,7 +26,9 @@ const Header = () => {
     <header className="sticky top-0 z-10 bg-lime-500 text-white">
       <section className="mx-auto flex flex-wrap max-w-4xl items-center justify-between p-4">
         <a href="#me">
-          <img src={boblogo} alt="" className="h-6 flex-grow flex-col" />
+          <h1 className="text-3xl">
+            NC NEWS
+          </h1>
         </a>
 
         <div>
