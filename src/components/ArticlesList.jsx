@@ -93,7 +93,7 @@ const ArticlesList = () => {
       <section className="mx-auto flex flex-wrap max-w-4xl items-center justify-between p-4">
 
       
-      <label htmlFor="sort-by">Sort Articles by: </label>
+      <label htmlFor="sort-by" className='hover:opacity-90'>Sort Articles by: </label>
       <select name="sort-by" id="sort-by" className="" onChange={handleSort}>
         <option value="created_at">Date</option>
         <option value="comment_count">Comments</option>
@@ -120,8 +120,8 @@ const ArticlesList = () => {
 
 
 
-      <main className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
-        <ul className="flex flex-wrap mt-4 gap-4 bg-white p-4 rounded-xl justify-center">
+      <main className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row bg-green-300">
+        <ul className="flex flex-wrap mt-4 gap-4 p-4 rounded-xl justify-center bg-yellow-300">
           {articlesList.articles.map((article) => {
             return (
               <main key={article.article_id}>
