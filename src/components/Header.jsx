@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-10 bg-lime-500 text-white">
       <section className="mx-auto flex flex-wrap max-w-4xl items-center justify-between p-4">
-        <Link to={'/'}>
+        <Link to={'/articles'}>
           <h1 className="text-3xl hover:opacity-90">
             NC NEWS
           </h1>

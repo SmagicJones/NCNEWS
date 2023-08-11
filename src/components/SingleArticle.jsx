@@ -37,7 +37,7 @@ const SingleArticle = () => {
             <Votes votes={foundArticle.votes} />
             <p className="text-center">Article ID: {foundArticle.article_id}</p>
            
-            <Link to={`/`}>
+            <Link to={`/articles`}>
                 <p className="text-center p-2 bg-yellow-300">Back</p>
              </Link>
           </section>
