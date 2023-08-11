@@ -30,7 +30,6 @@ const Header = () => {
             NC NEWS
           </h1>
         </Link>
-
         <div>
           <button
             id="hamburger-button"
