@@ -1,0 +1,26 @@
+import { useContext } from 'react';
+import DeleteComment from './DeleteComment';
+import { UserContext } from '../contexts/UserContext';
+
+export default function CommentCard({
+  article_id,
+  author,
+  body,
+  comment_id,
+  created_at,
+  votes,
+  setIsDeleting = { setIsDeleting },
+}) {
+  const { user } = useContext(UserContext);
+  return (
+    <li>
+      <p>Comment {comment_id}</p>
+      <p>Author: {author}</p>
+      <p>{body}</p>
+      <p>{created_at}</p>
+      <p>Votes: {votes}</p>
+      <p>{article_id}</p>
+      {user === author ? <DeleteComment comment_id={comment_id} setIsDeleting={setIsDeleting} /> : <></>}
+    </li>
+  );
+}

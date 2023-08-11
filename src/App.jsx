@@ -6,20 +6,24 @@ import SingleArticle from './components/SingleArticle';
 import { createBrowserRouter, Routes, Route, createRoutesFromElements, RouterProvider, Link } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
 
+import { UserProvider } from './contexts/UserContext';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout/>}>
-      <Route path="/articles" element={<ArticleList/>}/>
-      <Route path="/articles/topic/:topic" element={<ArticleList/>}/>
-      <Route path="/articles/:article_id" element={<SingleArticle/>} />
-    </Route>
-  )
+    <Route path="/" element={<RootLayout />}>
+      <Route path="/articles" element={<ArticleList />} />
+      <Route path="/articles/topic/:topic" element={<ArticleList />} />
+      <Route path="/articles/:article_id" element={<SingleArticle />} />
+    </Route>,
+  ),
 );
 
 function App() {
   return (
     <>
-      <RouterProvider router={router}/>   
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </>
   );
 }

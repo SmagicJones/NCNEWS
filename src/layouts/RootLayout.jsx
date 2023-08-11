@@ -5,7 +5,7 @@ import Header from '../components/Header';
 export default function RootLayout() {
   return (
     <div className="root-layout">
-    <Header/>
+      <Header />
       <main>
         <Outlet />
       </main>

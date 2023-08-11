@@ -4,6 +4,8 @@ import Votes from './Votes';
 import { useEffect, useState } from 'react';
 import { fetchArticle } from '../utils/api';
 
+import Comments from './Comments';
+
 const SingleArticle = () => {
   const { article_id } = useParams();
 
@@ -27,7 +29,7 @@ const SingleArticle = () => {
     <>
       <ul className="mb-12 flex scroll-mt-40 flex-row items-center justify-center gap-8 p-6 sm:flex-row">
         <li className="max-w-100 bg-cyan-500 hover:bg-cyan-400 rounded-xl pb-4 items-center justify-center">
-          <section className='mx-auto'>
+          <section className="mx-auto">
             <h3 className="text-center text-5xl p-4">{foundArticle.title}</h3>
             <img className="p-2 mx-auto" src={foundArticle.article_img_url} alt={foundArticle.title} />
             <p className="text-2xl text-center p-2">Topic: {foundArticle.topic}</p>
@@ -36,13 +38,14 @@ const SingleArticle = () => {
             <p className="text-center p-2">Created: {new Date(foundArticle.created_at).getFullYear()}</p>
             <Votes votes={foundArticle.votes} />
             <p className="text-center">Article ID: {foundArticle.article_id}</p>
-           
+
             <Link to={`/articles`}>
-                <p className="text-center p-2 bg-yellow-300">Back</p>
-             </Link>
+              <p className="text-center p-2 bg-yellow-300">Back</p>
+            </Link>
           </section>
         </li>
       </ul>
+      <Comments/>
     </>
   );
 };
