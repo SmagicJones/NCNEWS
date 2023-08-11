@@ -27,9 +27,8 @@ export default function Comments() {
 
   return (
     <>
-      <h1>Comments</h1>
       <NewCommentForm setNewComments={setNewComments} setIsPosting={setIsPosting} setPostError={setPostError} />
-      <ul>
+      <ul className='flex flex-wrap mt-4 gap-4 p-4 rounded-xl justify-center bg-yellow-300'>
         {postError ? <p>{postError}</p> : <></>}
         {newComments ? (
           newComments.map((comment) => {

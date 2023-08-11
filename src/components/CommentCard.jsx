@@ -13,8 +13,8 @@ export default function CommentCard({
 }) {
   const { user } = useContext(UserContext);
   return (
-    <li>
-      <p>Comment {comment_id}</p>
+    <li className="flex-1 max-w-sm bg-cyan-500 hover:bg-cyan-400 rounded-xl pb-4">
+      <p className='text-center text-1xl text-black'>Comment {comment_id}</p>
       <p>Author: {author}</p>
       <p>{body}</p>
       <p>{created_at}</p>
