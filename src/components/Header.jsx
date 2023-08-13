@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import boblogo from '../assets/bob-logo.svg';
-// import { Link } from "react-router-dom";
+
 
 import { MobileNav } from './MobileNav';
 
@@ -38,6 +38,9 @@ const Header = () => {
           <nav className="hidden space-x-8 text-xl md:block" aria-label="main">
             <div className="hover:opacity-90">
               <Topics />
+            </div>
+            <div className="hover:opacity-90">
+              <Link to={'/users'}>Login</Link>
             </div>
             {/* <label htmlFor="sort-by">Sort Articles by: </label>
             <select name="sort-by" id="sort-by" className="" onChange={handleSort}>

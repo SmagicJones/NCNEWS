@@ -1,7 +1,8 @@
 import './App.css';
-import Header from './components/Header';
+// import Header from './components/Header';
 import ArticleList from './components/ArticlesList';
-import Home from './components/Home';
+// import Home from './components/Home';
+import Users from './components/Users';
 import SingleArticle from './components/SingleArticle';
 import { createBrowserRouter, Routes, Route, createRoutesFromElements, RouterProvider, Link } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route path="/articles" element={<ArticleList />} />
       <Route path="/articles/topic/:topic" element={<ArticleList />} />
       <Route path="/articles/:article_id" element={<SingleArticle />} />
+      <Route path="/users" element={<Users/>} />
     </Route>,
   ),
 );

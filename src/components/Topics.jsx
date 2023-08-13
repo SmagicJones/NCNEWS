@@ -8,7 +8,6 @@ const Topics = () => {
 
   useEffect(() => {
     fetchTopics().then((data) => {
-      console.log(data)
       setTopics(data);
     });
   }, []);
