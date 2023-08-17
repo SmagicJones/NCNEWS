@@ -5,6 +5,7 @@ import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { fetchArticles } from '../utils/api';
 
 import ArticleCard from './ArticleCard';
+import Pagination from './Pagination';
 
 const ArticlesList = () => {
   const { topic } = useParams();
@@ -70,10 +71,9 @@ const ArticlesList = () => {
   useEffect(() => {
     fetchArticles(topic, sort_by, order, limit, p).then((data) => {
       const articles = data.articles;
-      const total_count = data.articles.total_count[0].count
-      console.log(total_count);
-      setArticleCount(total_count)
+      const total_count = data.articles.total_count[0].count;
       setArticlesList(articles);
+      setArticleCount(total_count);
       setIsLoading(false);
     });
   }, [topic, sort_by, order, limit, p]);
@@ -137,6 +137,7 @@ const ArticlesList = () => {
           })}
         </ul>
       </main>
+      <Pagination articleCount={articleCount}  limit={limit} />
 
     </>
   );
